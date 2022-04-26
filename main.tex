@@ -357,7 +357,18 @@ For the purpose of the experiment, the office space was divided into 14 equal-si
 
 
 \section{Data preprocessing}
+The process of data cleaning was carried out in two steps, first cleaning instances in the raw RSSI data where the tag could not be detected by all four gateways and hence the RSSI values for some gateways is 0. This could be due to a technical issue in the network or due to the tag being out o freach for one or more gateways. In this case, the best possible values were used. The second step involves cleaning the predicted employee trajectories, because the prediction model was trained only for two days and on stationary, it predicted the employee hopping over several grids in a very short duration.  
+After using the localisation model to predict the locations of the employees, the resulting dataset comprised of timestamp, Asset Tag ID and the grid-ID. Using some dataframe manipulation functions from the pandas library, features like previous grid-ID, next grid-ID, status of grid change and the time spent in the grid were computed. On analysing the trajectories of employees, it was observed that the dataset contained significant amount of noise. Therefore, the following rules were used to clean the data.
+  
+\begin{itemize}
+    \item There were a lot of instances where the users' location was being picked up as a nearby grid, just for one instance, since these hops were less than a second in duration and were redundant throughout the data, all such instances were labled as the user's seating location using as follows:
+    \item In some instances the employee was seated on the border of two grids, causing the model to predict the presence of the employee in the second grid quite often. This was a pattern across all employee trajectories where there was atleast one nearby grid which had been predicted as the location and the movement to and from that grid was random and redundant across all days as well as every hour of the day. Therefore, for each employee, this psedo-location was identified and labelled as their seating location.
+    \item Noise was observed not only for the instances around the seating location but also when the user was not present at their seating location. Therefore, if the employee's trajectory reflected frequent hops between two nearby grids, they were merged into the grid the user was initially at, or spent more time at.
+    
+\end{itemize}
 
+
+We admit that we do not have any ground truth behind these rules used for noise removal but they were carefully devised by taking into consideration the presence of common patterns across all days or each hour of the day and sometimes for every user.
 
 
 
