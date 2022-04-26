@@ -260,7 +260,7 @@ Preventing the risk of infection and close contact is now part of workplace safe
 The rest of this paper is organised as follows, we begin by reviewing the recent research work in this domain and identify the gaps in the literature. Then we introduce the utilised terminologies and describe the collected dataset after which we explain the methodology, elaborate on the analysis, and the results and discuss the relations between human movement and airflow patterns across workspaces before summing it up in the conclusion.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Related work}
@@ -315,7 +315,7 @@ Therefore the following gaps exist in the literature:
 \end{itemize}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \section{Data Collection}
@@ -353,8 +353,15 @@ For the purpose of the experiment, the office space was divided into 14 equal-si
     \item At the end of the data collection period, the participants were asked to return the Asset Tags in the designated box. 
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\section{Data preprocessing}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Methodology}
 
@@ -366,6 +373,12 @@ vertical spacing between elements of your work --- is not allowed.
 \subsection{Terminologies}
 \subsubsection{Human Movement}
 The term human movement in context of this study refers to the movement of employees across grids for the sake of this research, taking into account the presence of numerous persons in a single grid as well as one or more employees travelling across various grids at the same time. This research does not take into consideration an employee's mobility inside a grid.
+
+\subsubsection{Seating location} The seating locaion for each employee for this analysis has been taken as the grid where the employee spends maximum time, on most days, the value of which is the ID of that grid.
+
+\subsubsection{Trajectory} An instance of an employee present in the workspace where their location can be estimated within the workspace is considered as its trajectory for this study. 
+
+\subsubsection{Nearby grids} The grids located close or around a grid, were classified as nearby grids. Each grid has at least one nearby grid, the list of nearby grids for every grid is mentioned in Table-2. 
 
 
 
