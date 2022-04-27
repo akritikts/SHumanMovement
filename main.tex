@@ -273,9 +273,6 @@ With the outbreak of the pandemic and the struggle to reinstate office spaces, a
 
 Minimising exposure risk in office spaces is a constant battle of avoiding crowded areas. Recent developments help cope with this by the means of path discovery techniques fit for heterogeneous environments such as university campuses and office buildings. Costa and Ge et al. introduced a graph-based indoor-outdoor path technique that examines both the exterior graph of buildings and streets and the interior graph of the entrances and exits within each building to construct a unified, context-aware path by using an on-the-fly forecasting of congestion in corridors and hallways. When tested on realistic datasets, they illustrate the efficiency of their method by demonstrating up to an order of magnitude decrease in COVID-19 exposure \cite{costa2019caprio}. Jensen and Nielsen et al. created an algorithm that can traverse both indoor and outdoor spaces and yield the true shortest path between two arbitrary points. They accomplish this by integrating different models simultaneously, where the first model maintains the distinct nature of the two spaces by having explicit connections between outdoor and indoor spaces, and the second model abstracts this distinction away, providing a unified model of outdoor-indoor space \cite{jensen2016outdoor}.
 
-\subsection{Contact tracing and contact avoidance}
-
-Contact tracing has been recognized as a crucial component of disease containment, and recent advances in this sector have fueled its efficiency by providing discoveries such as reducing the need for widespread adoption of contact tracking activities and identifying asymptotic infections. Trivedi et al. developed WiFiTrace, a network-centric approach to contact tracing that relies on passive WiFi sensing with no client-side involvement. They used WiFi network logs collected by enterprise networks for performance and security monitoring to reconstruct device trajectories for contact tracing \cite{trivedi2021wifitrace}. YYue et al. propose a neural network model termed Spatio-Temporal Episodic Memory for COVID-19 (STEMCOVID) that uses contact tracking data to detect infectious asymptotic instances. The model encodes a collective Spatio-temporal episodic memory of individuals and contains an effective parallel search mechanism based on the fusion Adaptive Resonance Theory (ART) \cite{hu2020silent}. Avoiding contact may also be accomplished by minimising congestion, which can be achieved with the help of congestion forecasting, a field that has experienced tremendous growth during the pandemic. By utilising the building floor plan and modelling human trajectory as a Gaussian distribution, Anastasiou and Costa et al created a platform for indoor congestion data generation to facilitate congestion forecasting in indoor settings. They then implemented an MCAN using this method to train congestion forecasting models in order to successfully propose pathways inside buildings while avoiding exposure to congested locations \cite{anastasiou2021epicgen}. Using game theory, Xie and Luan et al devised a crowdsourcing-based indoor navigation model that encourages users to use navigation services. They show, via simulation and theoretical analysis, that the suggested mechanism may successfully encourage responders to perform positive navigation services and acquire higher social welfare than traditional approaches \cite{xie2021game}.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
@@ -296,6 +293,12 @@ Contact tracing has been recognized as a crucial component of disease containmen
 \end{tabular}%
 }
 \end{table*}
+
+\subsection{Contact tracing and contact avoidance}
+
+Contact tracing has been recognized as a crucial component of disease containment, and recent advances in this sector have fueled its efficiency by providing discoveries such as reducing the need for widespread adoption of contact tracking activities and identifying asymptotic infections. Trivedi et al. developed WiFiTrace, a network-centric approach to contact tracing that relies on passive WiFi sensing with no client-side involvement. They used WiFi network logs collected by enterprise networks for performance and security monitoring to reconstruct device trajectories for contact tracing \cite{trivedi2021wifitrace}. YYue et al. propose a neural network model termed Spatio-Temporal Episodic Memory for COVID-19 (STEMCOVID) that uses contact tracking data to detect infectious asymptotic instances. The model encodes a collective Spatio-temporal episodic memory of individuals and contains an effective parallel search mechanism based on the fusion Adaptive Resonance Theory (ART) \cite{hu2020silent}. Avoiding contact may also be accomplished by minimising congestion, which can be achieved with the help of congestion forecasting, a field that has experienced tremendous growth during the pandemic. By utilising the building floor plan and modelling human trajectory as a Gaussian distribution, Anastasiou and Costa et al created a platform for indoor congestion data generation to facilitate congestion forecasting in indoor settings. They then implemented an MCAN using this method to train congestion forecasting models in order to successfully propose pathways inside buildings while avoiding exposure to congested locations \cite{anastasiou2021epicgen}. Using game theory, Xie and Luan et al devised a crowdsourcing-based indoor navigation model that encourages users to use navigation services. They show, via simulation and theoretical analysis, that the suggested mechanism may successfully encourage responders to perform positive navigation services and acquire higher social welfare than traditional approaches \cite{xie2021game}.
+
+
 \subsection{Occupancy risk estimation}
 The ability of a place to provide a low-risk environment is determined by its inhabitants (number and duration of stay) as well as their interaction with the space. Sydora et al. provide a systematic simulation-based technique for calculating the infection risk for inhabitants of a building under various scenarios of building utilisation, as well as a virus transmission model that evaluates the possible infection transmission risk based on occupant behaviour \cite{sydora2022building}. Ciunkiewicz et al. devised an agent-based simulation (ABS) framework for localised settings that is highly configurable. This ABS enables extensive control over COVID-19's fast-growing epidemiological features, as well as information on risk and the impacts of both pharmaceutical and non-pharmacological interventions \cite{ciunkiewicz2022agent}. The findings of simulations can help facility administrators make better decisions and can also be utilised as inputs for a decision support system. 
 
@@ -331,13 +334,14 @@ Each site has its own set of participants. Each site's employees/students were b
 \subsubsection{Movement Data}
 Participants were requested to carry Kontakt Asset Tag-2(s) in their pockets for the duration of the study in order to record their mobility in their workspaces. Participants were requested to wear the same tag for the course of the research, but no information about the participant connected with the tag was recorded. Kontakt Asset Tag-2 Bluetooth tags are equipped with a 3DH motion sensor and are capable of over-the-air communication using Bluetooth over a range of up to 50m. Gateways detect and collect the BLE signals sent by these tags. These signals were received using Kontakt portal lights, which are plug-and-play BLE gateways. The Asset Tag-2 also has an infrared receiver, which, when paired with the gateway light, can offer room-level location precision. The portal lights can connect to an existing Wi-Fi network and have a Bluetooth range of 50 metres. Their working mechanism is as follows:
 The Asset Tag-2 are transmitters with a unique identification code that they communicate using Bluetooth Low Energy technology to surrounding receivers, which in this case are the Kontakt portal lights. The unique Asset Tag identification (i.e. tracking id) that is broadcast can be used to determine the presence and movement of a person carrying a certain tag. A gateway device passively monitors its surroundings for BLE card beacons. When beacons are detected, the gateway continually gathers beacon data such as their unique IDs, start and end timestamps, and RSSI. RSSI is used by the gateway to assess the proximity of the beacons to the gateway. Every 1.5 seconds, gateways send the collected beacon data to the cloud storage server. 
-The data acquired by the gateways was available through the Kontakt REST and Streams API in two formats: location, occupancy, telemetry, and sensor data as processed JSON in the form of a GET request or as raw RSSI signals. For each tag, JSON replies were provided once every minute, but RSSI signals were available every five seconds. We used RSSI signals for this experiment.
 \begin{figure}[h]
   \centering
   \includegraphics[width=3cm,height=3cm,keepaspectratio]{Asset-Tag-493x0-c-default}
   \includegraphics[width=4cm,height=4cm,keepaspectratio]{Group-15446-493x0-c-default}
   \caption{Kontakt Asset Tag-2 and Gateway}
   \end{figure}
+The data acquired by the gateways was available through the Kontakt REST and Streams API in two formats: location, occupancy, telemetry, and sensor data as processed JSON in the form of a GET request or as raw RSSI signals. For each tag, JSON replies were provided once every minute, but RSSI signals were available every five seconds. We used RSSI signals for this experiment.
+
 \subsubsection{Survey Data}
 For the duration of the study, participants were asked to complete a 15-question survey twice daily (if they were working from the office). This survey was designed to capture the ground truth about the participants' mobility patterns in the workplace. It included questions regarding the participant's seating location, their most-used pathway inside the workspace, interactions with coworkers, whether or not they interacted with others around them, trips away from the workstation, noise, and concentration levels. There was also a question about whether or not the participants were wearing masks. Participants were also encouraged to include their Asset tag ID in the survey response so that mobility data and survey results could be compared. To protect participant privacy, the survey included no personal information, and hence the Asset tag ID could not be used to retrace the participant.
 
@@ -360,19 +364,42 @@ The workplace area was split into 14 equal-sized grids for the purpose of the ex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{Data preprocessing}
-The process of data cleaning was carried out in two steps, first cleaning instances in the raw RSSI data where the tag could not be detected by all four gateways and hence the RSSI values for some gateways is 0. This could be due to a technical issue in the network or due to the tag being out o freach for one or more gateways. In this case, the best possible values were used. The second step involves cleaning the predicted employee trajectories, because the prediction model was trained only for two days and on stationary, it predicted the employee hopping over several grids in a very short duration.  
-After using the localisation model to predict the locations of the employees, the resulting dataset comprised of timestamp, Asset Tag ID and the grid-ID. Using some dataframe manipulation functions from the pandas library, features like previous grid-ID, next grid-ID, status of grid change and the time spent in the grid were computed. On analysing the trajectories of employees, it was observed that the dataset contained significant amount of noise. Therefore, the following rules were used to clean the data.
-  
+\section{Terminologies}
+Here we define the various terminologies for the context of our analysis. 
 \begin{itemize}
-    \item There were a lot of instances where the users' location was being picked up as a nearby grid, just for one instance, since these hops were less than a second in duration and were redundant throughout the data, all such instances were labled as the user's seating location using as follows:
-    \item In some instances the employee was seated on the border of two grids, causing the model to predict the presence of the employee in the second grid quite often. This was a pattern across all employee trajectories where there was atleast one nearby grid which had been predicted as the location and the movement to and from that grid was random and redundant across all days as well as every hour of the day. Therefore, for each employee, this psedo-location was identified and labelled as their seating location.
-    \item Noise was observed not only for the instances around the seating location but also when the user was not present at their seating location. Therefore, if the employee's trajectory reflected frequent hops between two nearby grids, they were merged into the grid the user was initially at, or spent more time at.
+    \item Human movement: The term "human movement" refers to the movement of employees across grids for the sake of this research, taking into account the presence of numerous persons in a single grid as well as one or more employees travelling across various grids at the same time. This research does not take into consideration an employee's mobility inside a grid.
+    \item Seating location: The seating location for each employee for this analysis has been taken as the grid where the employee spends maximum time, on most days, the value of which is the ID of that grid. It should be noted that the exact seating location of the employee cannot be estimated from this experiment. However, in some cases when the participant mentioned their Asset Tag ID in the survey, their seating locations can be compared to assess the validity of this method.
+    \item Trajectory: An instance of an employee present in the workspace where their location can be estimated within the workspace is considered as its trajectory for this study. For example an employee present in grid 2 for 10 minutes; and an employee moving from grid 2 to grid 5 to grid 10 in the last 2 minutes.
+    \item Nearby grids: The grids located close to or around a grid, were classified as nearby grids. Each grid has at least one nearby grid, the list of nearby grids for every grid is mentioned in Table-2.
 \end{itemize}
 
 
-We admit that we do not have any ground truth behind these rules used for noise removal but they were carefully devised by taking into consideration the presence of common patterns across all days or each hour of the day and sometimes for every user.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+\section{Data preprocessing}
+The data cleaning procedure was carried out in two parts, the first cleaning instances in the raw RSSI data when the tag could not be recognised by all four gateways, resulting in RSSI values of 0 for some gateways. This might be due to a network technical fault or the tag being out of reach for one or more gateways. The best available values were utilised in this circumstance. The second stage is to clean the predicted employee trajectories because the prediction model was only trained for two days using stationary tags and forecasted the employee hopping over numerous grids in a relatively short period of time.  
+The resulting dataset comprised timestamps, Asset Tag IDs, and grid-IDs after the localisation model predicted the locations of the employees. Features such as previous grid-ID, next grid ID, grid change status, and time spent in the grid were calculated using data frame manipulation techniques from Python's pandas module. When the trajectories of employees were examined, it was discovered that the dataset had a substantial level of noise. As a result, the following criteria were used to clean the data.
+  
+\begin{itemize}
+    \item There were multiple instances where the users' location was picked up as a nearby grid, just once every few minutes for a period shorter than 20 seconds. Because these hops were quite short in duration and were redundant throughout the data, all such instances were labelled as the user's seating location using the following formula: 
+    If the time spent in a grid is less than 0.33 minutes, 
+    and previous and next grid locations are the same,
+    And the current grid is a nearby grid of seating grid, 
+    then current grid = seating location.	
+    \item In certain cases, the employee was seated on the boundary of two grids, prompting the model to frequently forecast the person's presence in the other grid. This was a pattern throughout all employee trajectories where there was at least one neighbouring grid that had been predicted as the location, and travel to and from that grid was random and redundant over all days and hours of the day. As a result, using the following rule, this pseudo-location was recognised and labelled as each employee's sitting location:
+    if there are a lot of employee trajectories back and forth from a neighbouring grid, 
+    and there are no other grids visited in between, 
+    the trajectories of the neighbouring grid = the seating location.    
+    \item The noise was noticed not just in cases when the employee was present at their seating position, but also when the user was not present at their seating location. As a result, if the employee's trajectory showed frequent hops between two neighbouring grids, they were combined into the grid the user was originally at or spent more time at using the clause: 
+    If time spent in a grid is less than 0.33 minutes,
+    And previous and next grid locations are the same,
+    And the current grid is a nearby grid of the previous/next grid,
+    then current grid = previous/next location.
+\end{itemize}
+
+
+We acknowledge that we do not have any ground truth behind these rules used for noise removal but they were carefully devised by taking into consideration the presence of common patterns across all days or each hour of the day and sometimes for every user.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -384,15 +411,7 @@ margins, typeface sizes, line spacing, paragraph and list definitions,
 and the use of the \verb|\vspace| command to manually adjust the
 vertical spacing between elements of your work --- is not allowed.
 
-\subsection{Terminologies}
-\subsubsection{Human Movement}
-The term human movement in context of this study refers to the movement of employees across grids for the sake of this research, taking into account the presence of numerous persons in a single grid as well as one or more employees travelling across various grids at the same time. This research does not take into consideration an employee's mobility inside a grid.
 
-\subsubsection{Seating location} The seating locaion for each employee for this analysis has been taken as the grid where the employee spends maximum time, on most days, the value of which is the ID of that grid.
-
-\subsubsection{Trajectory} An instance of an employee present in the workspace where their location can be estimated within the workspace is considered as its trajectory for this study. 
-
-\subsubsection{Nearby grids} The grids located close or around a grid, were classified as nearby grids. Each grid has at least one nearby grid, the list of nearby grids for every grid is mentioned in Table-2. 
 
 
 
