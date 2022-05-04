@@ -375,7 +375,13 @@ Here we define the various terminologies for the context of our analysis.
 \section{Data preprocessing}
 The data cleaning procedure was carried out in two parts, the first cleaning instances in the raw RSSI data when the tag could not be recognised by all four gateways, resulting in RSSI values of 0 for some gateways. This might be due to a network technical fault or the tag being out of reach for one or more gateways. The best available values were utilised in this circumstance. The second stage is to clean the predicted employee trajectories because the prediction model was only trained for two days using stationary tags and forecasted the employee hopping over numerous grids in a relatively short period of time.  
 The resulting dataset comprised timestamps, Asset Tag IDs, and grid-IDs after the localisation model predicted the locations of the employees. Features such as previous grid-ID, next grid ID, grid change status, and time spent in the grid were calculated using data frame manipulation techniques from Python's pandas module. When the trajectories of employees were examined, it was discovered that the dataset had a substantial level of noise. As a result, the following criteria were used to clean the data.
-  
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4cm,height=4cm,keepaspectratio]{5a_Trajectory_feb22_14and15_before_cleaning.png}
+  \includegraphics[width=4cm,height=4cm,keepaspectratio]{5a_Trajectory_feb22_14and15_after_cleaning.png}
+  \caption{Trajectories of an employee for the duration of 60 minutes, before (left) and after (right) data cleaning}
+  \label{Data cleaning}
+  \end{figure}
 \begin{itemize}
     \item There were multiple instances where the users' location was picked up as a nearby grid, just once every few minutes for a period shorter than 20 seconds. Because these hops were quite short in duration and were redundant throughout the data, all such instances were labelled as the user's dwell location using the following formula: 
     If the time spent in a grid is less than 0.33 minutes, 
@@ -412,11 +418,43 @@ vertical spacing between elements of your work --- is not allowed.
 
 
 \section{Analysis of workspace behaviour}
-Out of 13 participants, 7 volunteered to enter their Asset Tag IDs in the survey responses, which served as ground truth for our analysis methodology. After data cleaning, for every participant, we identified the grids where they spend maximum time (continuous) and labelled them as their dwell location. We verified our approach by comparing these locations with the dwell locations mentioned in the survey responses for which we achieved 100% accuracy. After this, we analysed the employee trajectories to understand the locations they visit, the paths they take to visit them and the amount of time they spend at these locations. We identified three locations for each employee and the paths they take to get to these three locations and compared them to the "frequent walking paths" mentioned in the survey response. 
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table*}[!h]
+\centering
+\caption{}
+\label{tab:my-table}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llll}
+\hline
+Area & \textbf{Duration of maximum activity} & \textbf{No. of employees in the busy duration} & \textbf{Duration of stay for a single visit} \\ \hline
+\textbf{Entry/Exit} &  &  &  \\ \cline{1-3}
+\textbf{Workstations and sitting areas} & Consistent through the day & 3-7 per hour & 30s-5 min \\ \hline
+\textbf{Meeting rooms} & 12:00 PM & 1-3 per hour & 2-20 min \\ \hline
+\textbf{Kitchen space} & 11:00 AM -14:00 & 4-11 per hour & 2-20 min \\ \hline
+\textbf{Restroom and printing station} & Consistent through the day & 2-8 per hour & 30s-18 min \\ \hline
+\end{tabular}%
+}
+\end{table*}
+Employees at a workplace may have some habitual activities they undertake in their day-to-day life at work. This includes sitting with their colleagues for a few minutes when they get to work in the morning, getting a tea/coffee at a certain time each day or brainstorming an idea in the form of a group discussion. Through this analysis, we try to determine how these behaviours or work-related activities influence the risk of transmission in indoor environments and how can we minimise the transmission risk at the workplace.
 
-The employees have a habit of using the same paths to visit the same locations. 
+\subsection{Describing the workspace under study}
+The floorplan shown in Figure-2 represents an office in the Melbourne CBD, that is x metre square in area. \begin{itemize}
+    \item Entry/Exit point: Grid 12 covers the entry/exit point followed by the entry pathway connecting the workspace and the kitchen covered by grids 11 and 7. 
+    \item Workstations and seating areas: Grids 2, 3, 9 and 10 contain most of the workstations whereas grids 5, 6 and 7 also cover the common seating spaces (high-table, couch or coffee tables), walking pathways along with the workstations.
+    \item Meeting rooms: Grid 13 contains the large meeting room which has a wall separating it from the rest of the space and there's a smaller meeting room in Grid 2 enclosed by a glass door. 
+    \item Kitchen space: Grid 8 contains the kitchen (appliances and cooking station) whereas grids 4 and 7 cover the seating space around the kitchen. 
+    \item Other common areas: Grid 1 covers the restrooms, the bin and the printing site. 
+\end{itemize}
 
-Thereafter we identified the most used grids in the workspace and the purpose of their usage, the number of employees that are present in these grids at a time and the duration of their stay. Grids 3, 5, 7, 1 and 10 are the grids where maximum activity is observed and these are the common frequent locations across all participants. Grid 1 remains a popular destination for employees throughout the day which is not surprising as it gets utilised during restroom breaks and there is only one printing station in the office which is situated in this grid. The activity in grid 7 follows a trend. It starts getting busy after 11 AM, gets the busiest between 12:00 PM -13:00 and sees a decrease in human movement after 14:00. It can house up to 9 employees in an hour and they usually spend anywhere between approximately 2 to 20 minutes in the kitchen space during a single visit. It should be noted that grid 7 also covers the walking path that connects the kitchen area to the workstations and hence receives walking activity too. The activity in grid 5 also remains consistent throughout the day as employees utilise the grid to reach the restroom and the printing station in grid 1. It contains two workstations, and a common table apart from the part of the walking track for people sitting in grid 9. Employees generally spend between 30 seconds to 2 minutes here.  The popularity of grids 4 and 11 is similar and that of 2, 6, as well as that of grids 8 and 9. Grid 4 sees the presence of one or two employees around lunchtime and does not receive much activity apart from this. This could be because it contains the far-off part of the sitting area inside the kitchen space and may be an unpopular choice of dwelling for having lunch. The human movement in grid 6 also stays consistent throughout the day, where employees spend between 2 and 3 minutes during each stay, owing to its central location and versatile geometry covering six workstations, a coffee table, a couch as well as a common walking path for anyone travelling to the other half of the workspace. The number of time people spend in the kitchen grid 8, do they turn on an appliance, go back and then come back when their food is ready?
+
+
+
+Out of 13 participants, 7 volunteered to enter their Asset Tag IDs in the survey responses, which served as ground truth for our analysis methodology. After data cleaning, for every participant, we identified the grids where they spend maximum time (continuous) and labelled them as their dwell location. We verified our approach by comparing these locations with the dwell locations mentioned in the survey responses for which we achieved 100\% accuracy. After this, we analysed the employee trajectories to understand the locations they visit, the paths they take to visit them and the amount of time they spend at these locations. We identified three locations for each employee and the paths they take to get to these three locations in order to compare them with the "frequent walking paths" mentioned in the survey response. Not only did we achieve 94\% accuracy in determining the frequent whereabouts of employees, but we also observed that these locations as well as the paths remain the same for different days.
+
+Thereafter we identified the most used grids in the workspace and the purpose of their usage, the number of employees that are present in these grids at a time and the duration of their stay. Grids 3, 5, 7, 1 and 10 are the grids where maximum activity is observed and these are the common frequent locations across all participants. Grid 1 remains a popular destination for employees throughout the day which is not surprising as it gets utilised during restroom breaks and there is only one printing station in the office which is situated in this grid. The activity in grid 7 follows a trend. It starts getting busy after 11 AM, gets the busiest between 12:00 PM -13:00 and sees a decrease in human movement after 14:00. It can house up to 9 employees in an hour and they usually spend anywhere between approximately 2 to 20 minutes in the kitchen space during a single visit. It should be noted that grid 7 also covers the walking path that connects the kitchen area to the workstations and hence receives walking activity too. The activity in grid 5 also remains consistent throughout the day as employees utilise the grid to reach the restroom and the printing station in grid 1. It contains two workstations, and a common table apart from the part of the walking track for people sitting in grid 9. Employees generally spend between 30 seconds to 2 minutes here.  The popularity of grids 4 and 11 is similar and that of 2, 6, as well as that of grids 8 and 9. Grid 4 sees the presence of one or two employees around lunchtime and does not receive much activity apart from this. This could be because it contains the far-off part of the sitting area inside the kitchen space and may be an unpopular choice of dwelling for having lunch. The human movement in grid 6 also stays consistent throughout the day, where employees spend between 2 and 3 minutes during each stay, owing to its central location and versatile geometry covering six workstations, a coffee table, a couch as well as a common walking path for anyone travelling to the other half of the workspace. For the kitchen appliances and cooking area in grid 8, employees usually spend between 30 seconds to 2 minutes on a single visit. However, sometimes employees go to and fro between the kitchen and their dwell location. A possible scenario may be where an employee wants to heat their food, goes to the kitchen and puts it in the microwave, goes back to work and then returns to collect the food when it's ready. It was also observed that people sitting closer to the kitchen visit it more often as compared to those sitting further away. Apart from this, the pattern of vising the kitchen was similar for people sitting around the same region.
+
+
 
 It should be noted that there are two meeting rooms present in the study area, one with a capacity of 20 people and the other with a capacity of two. The bigger meeting room (grid 13 and 14) does not seem to be utilised for group meetings as per the trajectories since none of the participants spend longer than 3 minutes in the meeting room and at any given time, multiple people were not spotted to be inside the meeting room. It also forms one of the least popular locations inside the workspace. We validated this observation by examining the trends of CO2 levels, the TVOCs and the suspended particles in the meeting room which revealed that they are consistent and do not show any major events of deviation from the usual pattern. However, the trajectories suggest that employees may have utilised the part of the meeting room covered by grid 11 to take individual calls as higher noise was observed in the presence of a single participant for a period of approximately 20 minutes.
 
@@ -428,7 +466,26 @@ Every employee visits a set of locations each day during their stay at the workp
 
 
 \section{Results and Discussion}
-
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table*}[!h]
+\centering
+\caption{}
+\label{tab:my-table}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllll}
+\hline
+Space/Time & \textbf{Different times in the same day} & \textbf{Multiple times in the same day} & \textbf{Weekly} & \textbf{Between days} & \textbf{Different days of the week} \\ \hline
+\textbf{Visiting similar locations inside the office} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\textbf{Using the same route/walking path} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\textbf{Presence of hot pockets} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\textbf{Congestion in hot pockets} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\textbf{human movement and the density of pathogens} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\textbf{Pattern of human movement} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\textbf{Human movement cycle for an employee} & To be filled & To be filled & To be filled & To be filled & To be filled \\ \hline
+\end{tabular}%
+}
+\end{table*}
 
 
 \section{Authors and Affiliations}
